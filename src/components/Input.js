@@ -15,29 +15,29 @@ const InputComponent = styled.input`
   width: 100%;
   border: none;
   margin-top: 20px;
-  border-bottom: 1px solid #9F9B9B;
+  border-bottom: 1px solid #9f9b9b;
   font-size: 17px;
-  :focus ~ label,
-  :valid ~ label {
+
+  :focus ~ div:before {
+    transform: scaleX(1);
+  }
+
+  :focus ~ label{
     transform: translateY(-20px);
     font-size: 12px;
     color: #fff;
-  }
-
-  :focus ~ div:before,
-  :valid ~ div:before {
-    transform: scaleX(1);
-  }
 `;
 
 const Label = styled.label`
   position: absolute;
   bottom: 10px;
   left: 0;
-  color: #9F9B9B;
   pointer-events: none;
   transition: all 0.3s ease;
   width: 100%;
+  transform: ${(props) => props.writing && "translateY(-20px)"};
+  font-size: ${(props) => (props.writing ? "12px" : "16px")};
+  color: ${(props) => (props.writing ? "#fff" : "#9F9B9B")};
 `;
 
 const Underline = styled.div`
@@ -45,6 +45,7 @@ const Underline = styled.div`
   bottom: 0px;
   height: 2px;
   width: 100%;
+  background: ${(props) => props.color};
 
   :before {
     position: absolute;
@@ -52,12 +53,14 @@ const Underline = styled.div`
     height: 100%;
     width: 100%;
     background: #fff;
-    transform: scaleX(0);
+    transform: ${(props) => (props.writing ? "scaleX(1)" : "scaleX(0)")};
     transition: transform 0.3s ease;
   }
 `;
 
 export default function Input({ name, value, handleChange, error, label }) {
+  const writing = value.length > 0;
+  
   return (
     <>
       <WrapperInput>
@@ -66,10 +69,9 @@ export default function Input({ name, value, handleChange, error, label }) {
           name={name}
           value={value}
           onChange={handleChange}
-          required
         />
-        <Underline></Underline>
-        <Label>{label}</Label>
+        <Underline color={error ? '#ff453a' : '#9F9B9B'} writing={writing}></Underline>
+        <Label writing={writing}>{label}</Label>
       </WrapperInput>
       <InputError visible={error && error} message={error} />
     </>

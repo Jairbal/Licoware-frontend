@@ -1,11 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import styled from "@emotion/styled";
 import Form from "../components/Form";
 import InputPassword from "../components/InputPassword";
 import Input from "../components/Input";
 
-// ToDo
-// Arreglar validación de errores en el formulario
+// actions de redux
+import { iniciarSesionAction } from "../actions/usuarios";
+import { cambioPagina } from "../actions/ui";
+
+const Wrapper = styled.div`
+  margin-top: 88px;
+`;
 
 const Button = styled.button`
   background-color: #b2002d;
@@ -24,67 +30,91 @@ const Button = styled.button`
 `;
 
 export default function Entrar(props) {
-  const { setTitlePage } = props;
+  // dispatch de redux
+  const dispatch = useDispatch();
 
   // Cambiar el nombre de la página en el Head (Componenten Layout)
   useEffect(() => {
-    setTitlePage("INICIAR SESIÓN");
-  }, [setTitlePage]);
+    dispatch(cambioPagina("INICIAR SESIÓN"));
+  }, [dispatch]);
 
   const [formData, setFormData] = useState({
-    user: "",
+    usuario: "",
     password: "",
   });
 
   const [error, setError] = useState({
-    user: "",
+    usuario: "",
     password: "",
   });
 
-  const { user, password } = formData;
+  const { usuario, password } = formData;
 
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-    handleError();
+    clearErrors();
   };
 
-  const handleError = () => {
-    if (user.trim() === "") {
+  const clearErrors = () => {
+    if (usuario.trim().length > 0) {
       setError({
         ...error,
-        user: "Campo obligatorio",
+        usuario: "",
+      });
+    }
+    if (password.trim().length > 0) {
+      setError({
+        ...error,
+        password: "",
+      });
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // validación del formulario
+    if (usuario.trim().length === 0 && password.trim().length === 0) {
+      setError({
+        ...error,
+        password: "Campo obligatorio",
+        usuario: "Campo obligatorio",
       });
       return;
     }
-    if (password.trim() === "") {
+    if (usuario.trim().length === 0) {
+      setError({
+        ...error,
+        usuario: "Campo obligatorio",
+      });
+      return;
+    }
+    if (password.trim().length === 0) {
       setError({
         ...error,
         password: "Campo obligatorio",
       });
       return;
     }
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleError();
-    if (error.user || error.password) return;
+    dispatch(iniciarSesionAction(formData));
 
+    // redirección al home
     props.history.push("/");
   };
 
   return (
-    <>
+    <Wrapper>
       <Form onSubmit={handleSubmit}>
         <Input
-          name="user"
+          name="usuario"
           label="Usuario"
-          value={user}
+          value={usuario}
           handleChange={handleChange}
-          error={error.user}
+          error={error.usuario}
         />
         <InputPassword
           name="password"
@@ -95,6 +125,6 @@ export default function Entrar(props) {
         />
         <Button>Entrar</Button>
       </Form>
-    </>
+    </Wrapper>
   );
 }

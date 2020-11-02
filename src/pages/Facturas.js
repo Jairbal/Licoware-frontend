@@ -1,11 +1,15 @@
-import React, {useEffect} from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux';
+import { cambioPagina } from '../actions/ui';
 
 export default function Facturas(props) {
-    const {setTitlePage} = props;
-    // Cambiar el nombre de la página en el Head (Componenten Layout)
-    useEffect(() => {
-        setTitlePage('FACTURAS');
-    }, [setTitlePage]);
+    // dispatch de redux
+  const dispatch = useDispatch();
+
+  // Cambiar el nombre de la página en el Head (Componenten Layout)
+ useEffect(() => {
+    dispatch(cambioPagina("FACTURAS"));
+ }, [dispatch])
 
     
     return (
