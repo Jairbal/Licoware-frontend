@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { cambioPagina } from "../actions/ui";
+import { changePage } from "../actions/ui";
 
 export default function Home(props) {
   // dispatch de redux
@@ -8,7 +8,7 @@ export default function Home(props) {
 
   // Cambiar el nombre de la página en el Head (Componenten Layout)
   useEffect(() => {
-    dispatch(cambioPagina("BIENVENIDO"));
+    dispatch(changePage("BIENVENIDO"));
   }, [dispatch])
 
   return (

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
 import Form from "../components/Form";
 import InputPassword from "../components/InputPassword";
 import Input from "../components/Input";
 
 // actions de redux
-import { iniciarSesionAction } from "../actions/usuarios";
-import { cambioPagina } from "../actions/ui";
+import { loginAsync } from "../actions/auth";
+import { changePage } from "../actions/ui";
+import { ErrorMessage } from "../components/ErrorMessage";
 
 const Wrapper = styled.div`
   margin-top: 88px;
@@ -33,9 +34,11 @@ export default function Entrar(props) {
   // dispatch de redux
   const dispatch = useDispatch();
 
+  const {message: messageError} = useSelector(state => state.ui.error)
+
   // Cambiar el nombre de la página en el Head (Componenten Layout)
   useEffect(() => {
-    dispatch(cambioPagina("INICIAR SESIÓN"));
+    dispatch(changePage("INICIAR SESIÓN"));
   }, [dispatch]);
 
   const [formData, setFormData] = useState({
@@ -100,15 +103,17 @@ export default function Entrar(props) {
       return;
     }
 
-    dispatch(iniciarSesionAction(formData));
+    dispatch(loginAsync(formData));
 
     // redirección al home
-    props.history.push("/");
+    //props.history.push("/");
   };
 
   return (
     <Wrapper>
+      
       <Form onSubmit={handleSubmit}>
+      {messageError && <ErrorMessage/>}
         <Input
           name="usuario"
           label="Usuario"

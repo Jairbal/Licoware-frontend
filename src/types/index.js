@@ -1,7 +1,11 @@
 
 export const types = {
 
-    uiCambioPagina: '[UI] Cambio Pagina',
+    uiChangePage: '[UI] Change Page',
+    uiLoading: '[UI] Loading',
+    uiError: '[UI] Error',
+    uiClearError: '[UI] Clear Error',
 
-    authIniciarSesion: '[AUTH] Iniciar Sesion',
+    authLogin: '[AUTH] Login',
+    authValidateToken: '[AUTH] Validate Token',
 }

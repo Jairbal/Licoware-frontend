@@ -1,20 +1,46 @@
-import { types } from "../types"
+import { types } from "../types";
 
 const initialState = {
-    titlePage: ''
-}
+  titlePage: "",
+  loading: false,
+  error: {
+    place: null,
+    message: null,
+  }
+};
 
-export default  (state = initialState, action) => {
-    switch (action.type) {
-        case types.uiCambioPagina:
-            return {
-                ...state,
-                titlePage: action.payload
-            }
-        
-        default: 
-            return {
-                ...state,
-            }
-    }
-}
+export const uiReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case types.uiChangePage:
+      return {
+        ...state,
+        titlePage: action.payload,
+      };
+
+    case types.uiLoading: 
+      return {
+        ...state,
+        loading: action.payload,
+      };
+
+    case types.uiError: 
+      return {
+        ...state,
+        error: {
+          ...state.error,
+          message: action.payload,
+        }
+      }
+    
+    case types.uiClearError:
+      return {
+        ...state,
+        error: initialState.error,
+      }
+
+    default:
+      return {
+        ...state,
+      };
+  }
+};

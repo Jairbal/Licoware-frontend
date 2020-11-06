@@ -9,9 +9,12 @@ import Home from "../pages/Home";
 import Inventario from "../pages/Inventario";
 import Proveedores from "../pages/Proveedores";
 import Layout from "../components/Layout";
+import { useSelector } from "react-redux";
 
 export const AppRouter = () => {
-    const isAuthenticated = false;
+  
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+
   return (
     <Router>
       <Layout>

@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import Proveedor from '../components/Proveedor';
 import Add from '../icons/Add';
 import { useDispatch } from 'react-redux';
-import { cambioPagina } from '../actions/ui';
+import { changePage } from '../actions/ui';
 
 const Wrapper = styled.div`
     margin: 88px 24px 74px 24px;
@@ -26,7 +26,7 @@ export default function Proveedores(props) {
 
   // Cambiar el nombre de la página en el Head (Componenten Layout)
   useEffect(() => {
-    dispatch(cambioPagina("PROVEEDORES"));
+    dispatch(changePage("PROVEEDORES"));
   }, [dispatch])
 
     return (

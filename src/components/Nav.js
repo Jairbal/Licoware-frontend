@@ -12,27 +12,28 @@ const NavBottom = styled.nav`
   position: fixed;
   bottom: 0;
   width: 100%;
-  height: 50px;
   border-top: 1px solid #fff;
   backdrop-filter: blur(5px);
 `;
 
 const Icons = styled.div`
-  margin: 0 24px;
   display: flex;
-  flex-direction: row;
+  flex-flow: row-reverse wrap-reverse;
   justify-content: space-between;
-  align-items: center;
-  height: 100%;
+  align-items: flex-end;
+  height: ${(props) => props.height};
+  overflow: hidden;
 `;
 
 const Icon = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 10px 0px;
   :hover {
     cursor: pointer;
   }
+  width: 70px;
 `;
 
 const Title = styled.p`
@@ -44,6 +45,8 @@ export default function Nav() {
   const history = useHistory();
   const location = useLocation();
   const [active, setActive] = useState(location.pathname);
+  const [showAll, setShowAll] = useState(false);
+  const [isMore, setIsMore] = useState(false);
 
   const handleIconClick = (page) => {
     history.push(page);
@@ -51,12 +54,22 @@ export default function Nav() {
   };
 
   const handleMore = () => {
-    setActive('/more');
-  }
+    setShowAll(!showAll);
+    setIsMore(!isMore);
+  };
 
   return (
-    <NavBottom>
-      <Icons>
+    <NavBottom >
+      <Icons height={isMore ? 'auto' : '54px'}>
+      <Icon>
+          <MoreIcon
+            color={active === "/more" ? "#B2002D" : "#fff"}
+            onClick={() => handleMore()}
+          />
+          <Title color={active === "/more" ? "#B2002D" : "#fff"}>
+            {isMore ? "Menos" : "Más"}
+          </Title>
+        </Icon>
         <Icon onClick={() => handleIconClick("/")}>
           <HomeIcon color={active === "/" ? "#B2002D" : "#fff"} />
           <Title color={active === "/" ? "#B2002D" : "#fff"}>Home</Title>
@@ -83,13 +96,20 @@ export default function Nav() {
             Inventario
           </Title>
         </Icon>
-        <Icon>
-          <MoreIcon
-            color={active === "/more" ? "#B2002D" : "#fff"}
-            onClick={() => handleMore("/more")}
-          />
-          <Title color={active === "/more" ? "#B2002D" : "#fff"}>Más</Title>
+
+        <Icon onClick={() => handleIconClick("/")}>
+          <HomeIcon color={active === "/" ? "#B2002D" : "#fff"} />
+          <Title color={active === "/" ? "#B2002D" : "#fff"}>Home</Title>
         </Icon>
+        <Icon onClick={() => handleIconClick("/proveedores")}>
+          <ProveedoresIcon
+            color={active === "/proveedores" ? "#B2002D" : "#fff"}
+          />
+          <Title color={active === "/proveedores" ? "#B2002D" : "#fff"}>
+            Proveedores
+          </Title>
+        </Icon>
+        
       </Icons>
     </NavBottom>
   );
