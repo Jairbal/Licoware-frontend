@@ -1,31 +1,30 @@
-import { types } from '../types';
+import { types } from "../types";
 
 const initialState = {
-    _id: null,
-    nombre: null,
-    apellido: null,
-    rol: null,
-    usuario: null,
-    isAuthenticated: false,
-}
+  _id: null,
+  nombre: null,
+  apellido: null,
+  rol: null,
+  usuario: null,
+  isAuthenticated: false,
+};
 
 export const authReducer = (state = initialState, action) => {
-    switch (action.type) {
-        
-        case types.authValidateToken:
-        case types.authLogin:
-            return {
-                ...initialState,
-                apellido: action.payload.apellido,
-                nombre: action.payload.nombre,
-                rol: action.payload.rol,
-                usuario: action.payload.usuario,
-                _id: action.payload._id,
-                isAuthenticated: true
-            }
-        default:
-            return {
-                ...state,
-            }
-    }
-} 
+  switch (action.type) {
+    case types.authValidateToken:
+    case types.authLogin:
+      return {
+        ...initialState,
+        apellido: action.payload.apellido,
+        nombre: action.payload.nombre,
+        rol: action.payload.rol,
+        usuario: action.payload.usuario,
+        _id: action.payload._id,
+        isAuthenticated: true,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+};

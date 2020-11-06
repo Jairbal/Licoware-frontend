@@ -6,6 +6,9 @@ export const types = {
     uiError: '[UI] Error',
     uiClearError: '[UI] Clear Error',
 
+
+    proveedorShowNewForm: '[Proveedor] Show NewForm',
+
     authLogin: '[AUTH] Login',
     authValidateToken: '[AUTH] Validate Token',
 }
