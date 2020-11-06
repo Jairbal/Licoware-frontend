@@ -8,15 +8,16 @@ export const PrivateRouter = ({
   component: Component,
   ...rest
 }) => {
+
   return (
     <>
-    <Route
-      {...rest}
-      component={(props) =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to="/entrar" />
-      }
-    />
-    <Nav />
+      <Route
+        {...rest}
+        component={(props) =>
+          isAuthenticated ? <Component {...props} /> :  <Redirect to="/entrar" />
+        }
+      />
+      <Nav />
     </>
   );
 };

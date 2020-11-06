@@ -4,6 +4,7 @@ import Proveedor from '../components/Proveedor';
 import Add from '../icons/Add';
 import { useDispatch } from 'react-redux';
 import { changePage } from '../actions/ui';
+import { FormNewProveedor } from '../components/FormNewProveedor';
 
 const Wrapper = styled.div`
     margin: 88px 24px 74px 24px;
@@ -18,6 +19,7 @@ const AddIcon = styled(Add)`
     position: fixed;
     margin-bottom: 74px;
     margin-right: 24px;
+    
 `;
 
 export default function Proveedores(props) {
@@ -31,6 +33,7 @@ export default function Proveedores(props) {
 
     return (
         <Wrapper>
+            <FormNewProveedor />
             <Proveedor />
             <Proveedor />
             <Proveedor />

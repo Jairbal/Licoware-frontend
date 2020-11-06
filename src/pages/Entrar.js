@@ -30,7 +30,7 @@ const Button = styled.button`
   }
 `;
 
-export default function Entrar(props) {
+export default function Entrar() {
   // dispatch de redux
   const dispatch = useDispatch();
 
@@ -104,9 +104,6 @@ export default function Entrar(props) {
     }
 
     dispatch(loginAsync(formData));
-
-    // redirección al home
-    //props.history.push("/");
   };
 
   return (

@@ -2,7 +2,7 @@ import { types } from "../types";
 
 const initialState = {
   titlePage: "",
-  loading: false,
+  loading: true,
   error: {
     place: null,
     message: null,

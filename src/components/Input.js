@@ -58,14 +58,14 @@ const Underline = styled.div`
   }
 `;
 
-export default function Input({ name, value, handleChange, error, label }) {
+export default function Input({ name, type='text', value, handleChange, error, label }) {
   const writing = value.length > 0;
   
   return (
     <>
       <WrapperInput>
         <InputComponent
-          type="text"
+          type={type}
           name={name}
           value={value}
           onChange={handleChange}

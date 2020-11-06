@@ -46,15 +46,15 @@ export function validateTokenAsync(token) {
       },
     })
       .then((user) => {
-        dispatch(loading(false));
         dispatch(validateToken(user.data.user));
         localStorage.setItem("token", user.data.token);
         localStorage.setItem("_id", user.data.user._id);
+        dispatch(loading(false));
       })
       .catch((error) => {
         if (error.response) {
-          dispatch(loading(false));
           dispatch(uiError(error.response.data.message));
+          dispatch(loading(false));
         }
       });
       

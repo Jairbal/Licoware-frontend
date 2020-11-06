@@ -7,6 +7,7 @@ export const PublicRouter = ({
   component: Component,
   ...rest
 }) => {
+
   return (
     <Route
       {...rest}
