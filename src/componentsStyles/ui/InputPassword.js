@@ -1,13 +1,12 @@
 import styled from "@emotion/styled";
-import React from "react";
-import InputError from "../components/InputError";
+import ShowHide from "../../icons/ShowHide";
 
-const WrapperInput = styled.div`
+export const WrapperInput = styled.div`
   position: relative;
   margin-top: 30px;
 `;
 
-const InputComponent = styled.input`
+export const InputComponent = styled.input`
   color: #fff;
   background: none;
   outline: none;
@@ -15,7 +14,7 @@ const InputComponent = styled.input`
   width: 100%;
   border: none;
   margin-top: 20px;
-  border-bottom: 1px solid #9f9b9b;
+  border-bottom: 1px solid #9F9B9B;
   font-size: 17px;
 
   :focus ~ div:before {
@@ -28,7 +27,7 @@ const InputComponent = styled.input`
     color: #fff;
 `;
 
-const Label = styled.label`
+export const Label = styled.label`
   position: absolute;
   bottom: 10px;
   left: 0;
@@ -40,7 +39,7 @@ const Label = styled.label`
   color: ${(props) => (props.writing ? "#fff" : "#9F9B9B")};
 `;
 
-const Underline = styled.div`
+export const Underline = styled.div`
   position: absolute;
   bottom: 0px;
   height: 2px;
@@ -58,22 +57,13 @@ const Underline = styled.div`
   }
 `;
 
-export default function Input({ name, type='text', value, handleChange, error, label }) {
-  const writing = value.length > 0;
-  
-  return (
-    <>
-      <WrapperInput>
-        <InputComponent
-          type={type}
-          name={name}
-          value={value}
-          onChange={handleChange}
-        />
-        <Underline color={error ? '#ff453a' : '#9F9B9B'} writing={writing}></Underline>
-        <Label writing={writing}>{label}</Label>
-      </WrapperInput>
-      <InputError visible={error && error} message={error} />
-    </>
-  );
-}
+export const ShowHidenButton = styled(ShowHide)`
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  color: red;
+
+  :hover {
+    cursor: pointer;
+  }
+`;

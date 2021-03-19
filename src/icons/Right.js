@@ -1,8 +1,9 @@
 import * as React from "react"
 
 export default function Right(props) {
+  const {onClick} = props;
   return (
-    <svg width={25} height={25} viewBox="0 0 18 18" {...props}>
+    <svg width={25} height={25} viewBox="0 0 18 18" {...props} onClick={onClick}>
       <g transform="translate(-337 -164)">
         <circle
           cx={9}

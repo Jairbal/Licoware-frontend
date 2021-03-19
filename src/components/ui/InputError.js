@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-import Error from "../icons/Error";
+import Error from "../../icons/Error";
 
 const Contenedor = styled.div`
   margin-top: 10px;

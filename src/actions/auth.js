@@ -1,6 +1,6 @@
 import axios from "axios";
 import { config } from "../config";
-import { uiError, uiClearError, loading } from "./ui";
+import { uiError, uiClearError, loadingApp } from "./ui";
 
 import { types } from "../types";
 
@@ -34,9 +34,9 @@ export function loginAsync({ usuario, password }) {
 
 export function validateTokenAsync(token) {
   return async (dispatch) => {
-    dispatch(loading(true));
+    dispatch(loadingApp(true));
     dispatch(uiClearError());
-    
+
     axios({
       method: "POST",
       url: `${config.baseApiUrl}/auth/validar`,
@@ -45,20 +45,26 @@ export function validateTokenAsync(token) {
         apiKeyToken: config.apiKeyToken,
       },
     })
-      .then((user) => {
-        dispatch(validateToken(user.data.user));
-        localStorage.setItem("token", user.data.token);
-        localStorage.setItem("_id", user.data.user._id);
-        dispatch(loading(false));
+      .then((response) => {
+        dispatch(validateToken(response.data.user));
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("_id", response.data.user._id);
+        dispatch(loadingApp(false));
       })
       .catch((error) => {
         if (error.response) {
           dispatch(uiError(error.response.data.message));
-          dispatch(loading(false));
+          dispatch(loadingApp(false));
         }
       });
-      
   };
+}
+
+export const logoutAsync = () => {
+  return async (dispatch) => {
+    localStorage.clear();
+    dispatch(logout());
+  }
 }
 
 const login = (usuario) => ({
@@ -70,3 +76,7 @@ const validateToken = (usuario) => ({
   type: types.authValidateToken,
   payload: usuario,
 });
+
+const logout = () => ({
+  type: types.authLogout,
+})

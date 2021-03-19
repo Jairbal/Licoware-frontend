@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "@emotion/styled";
-import Form from "../components/Form";
-import InputPassword from "../components/InputPassword";
-import Input from "../components/Input";
+import Form from "../components/ui/forms/Form";
+import InputPassword from "../components/ui/InputPassword";
+import Input from "../components/ui/Input";
 
 // actions de redux
 import { loginAsync } from "../actions/auth";
 import { changePage } from "../actions/ui";
-import { ErrorMessage } from "../components/ErrorMessage";
+import { ErrorMessage } from "../components/ui/ErrorMessage";
 
 const Wrapper = styled.div`
   margin-top: 88px;
@@ -83,25 +83,26 @@ export default function Entrar() {
     if (usuario.trim().length === 0 && password.trim().length === 0) {
       setError({
         ...error,
-        password: "Campo obligatorio",
-        usuario: "Campo obligatorio",
+        password: "La contraseña es obligatoria",
+        usuario: "El usuario es obligatorio",
       });
       return;
     }
     if (usuario.trim().length === 0) {
       setError({
         ...error,
-        usuario: "Campo obligatorio",
+        usuario: "El usuario es obligatorio",
       });
       return;
     }
     if (password.trim().length === 0) {
       setError({
         ...error,
-        password: "Campo obligatorio",
+        password: "La contraseña es obligatoria",
       });
       return;
     }
+    
 
     dispatch(loginAsync(formData));
   };
@@ -121,6 +122,7 @@ export default function Entrar() {
         <InputPassword
           name="password"
           label="Contraseña"
+          autoComplete
           value={password}
           handleChange={handleChange}
           error={error.password}

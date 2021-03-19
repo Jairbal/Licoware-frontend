@@ -6,21 +6,22 @@ import { PrivateRouter } from "./PrivateRouter";
 import Entrar from "../pages/Entrar";
 import Facturas from "../pages/Facturas";
 import Home from "../pages/Home";
-import Inventario from "../pages/Inventario";
+import Productos from "../pages/Productos";
 import Proveedores from "../pages/Proveedores";
-import Layout from "../components/Layout";
+import Layout from "../components/ui/layout/Layout";
 import { useSelector } from "react-redux";
 import { LoadingScreen } from "../components/LoadingScreen";
+import Proveedor from "../pages/Proveedor";
 
 export const AppRouter = () => {
-  const loading = useSelector((state) => state.ui.loading);
+  const loadingApp = useSelector((state) => state.ui.loadingApp);
 
   // verifica si se encuentra authenticado mediante el stado de redux
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   return (
     <>
-      {loading ? (
+      {loadingApp ? (
         <LoadingScreen />
       ) : (
         <Router>
@@ -46,14 +47,20 @@ export const AppRouter = () => {
               />
               <PrivateRouter
                 exact
-                path="/inventario"
-                component={Inventario}
+                path="/productos"
+                component={Productos}
                 isAuthenticated={isAuthenticated}
               />
               <PrivateRouter
                 exact
                 path="/proveedores"
                 component={Proveedores}
+                isAuthenticated={isAuthenticated}
+              />
+              <PrivateRouter
+                exact
+                path="/proveedores/:_id"
+                component={Proveedor}
                 isAuthenticated={isAuthenticated}
               />
             </Switch>

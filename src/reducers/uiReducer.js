@@ -2,11 +2,11 @@ import { types } from "../types";
 
 const initialState = {
   titlePage: "",
-  loading: true,
+  loadingApp: true,
   error: {
     place: null,
     message: null,
-  }
+  },
 };
 
 export const uiReducer = (state = initialState, action) => {
@@ -17,26 +17,32 @@ export const uiReducer = (state = initialState, action) => {
         titlePage: action.payload,
       };
 
-    case types.uiLoading: 
+    case types.uiLoadingApp:
+      return {
+        ...state,
+        loadingApp: action.payload,
+      };
+
+    case types.uiLoading:
       return {
         ...state,
         loading: action.payload,
       };
 
-    case types.uiError: 
+    case types.uiError:
       return {
         ...state,
         error: {
           ...state.error,
           message: action.payload,
-        }
-      }
-    
+        },
+      };
+
     case types.uiClearError:
       return {
         ...state,
         error: initialState.error,
-      }
+      };
 
     default:
       return {

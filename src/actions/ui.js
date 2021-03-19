@@ -5,6 +5,11 @@ export const changePage = (titlePage) => ({
   payload: titlePage,
 });
 
+export const loadingApp = (value) => ({
+  type: types.uiLoadingApp,
+  payload: value
+});
+
 export const loading = (value) => ({
   type: types.uiLoading,
   payload: value

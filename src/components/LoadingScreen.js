@@ -1,18 +1,7 @@
 import React from "react";
-import styled from "@emotion/styled";
+import {Wrapper} from '../componentsStyles/LoadingScreen';
 
-import "./LoadingScreen.css";
-
-const Wrapper = styled.div`
-  width: 100%;
-  height: 100%;
-  position:fixed;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: white;
-  flex-direction: column;
-`;
+import "../componentsStyles/LoadingScreen.css";
 
 export const LoadingScreen = () => {
   return (

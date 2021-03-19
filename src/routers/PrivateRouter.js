@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Redirect, Route } from "react-router-dom";
-import Nav from "../components/Nav";
+import Nav from "../components/ui/layout/Nav";
 
 export const PrivateRouter = ({
   isAuthenticated,
